@@ -18,13 +18,13 @@ public class Weapon {
     private int uses = 0;
     
     /* Constructor de la clase weapon*/
-    Weapon (float p, int u) {
+    Weapon(float p, int u) {
         power = p;
         uses = u;
     }
     
     /* Método devuelve la intensidad de ataque del jugador*/
-    public float attack () {
+    public float attack() {
         if (uses > 0) {
             uses--;
             return power;
