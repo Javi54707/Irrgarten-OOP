@@ -29,10 +29,12 @@ public class Weapon {
             uses--;
             return power;
         }
-        return 0;
+        else
+            return 0;
     }
     
     /* Método tostring*/
+    @Override
     public String toString() {
         return "W[" + power + "," + uses + "]";
     }
