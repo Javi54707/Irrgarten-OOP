@@ -14,19 +14,19 @@ import java.util.Random;
  * Esta clase toma las decisiones que dependen del azar en el juego
  */
 public class Dice {
-    static private float MAX_USES = 5;
-    static private float MAX_INTELLIGENCE = 10.0f;
-    static private float MAX_STRENGHT = 10.0f;
-    static private float RESURRECT_PROB = 0.3f;
-    static private float WEAPONS_REWARD = 2;
-    static private float SHIELDS_REWARD = 3;
-    static private float HEALTH_REWARD = 5;
-    static private float MAX_ATTACK = 3;
-    static private float MAX_SHIELD = 2;
+    private static final int MAX_USES = 5;
+    private static final float MAX_INTELLIGENCE = 10.0f;
+    private static final float MAX_STRENGHT = 10.0f;
+    private static final float RESURRECT_PROB = 0.3f;
+    private static final int WEAPONS_REWARD = 2;
+    private static final int SHIELDS_REWARD = 3;
+    private static final int HEALTH_REWARD = 5;
+    private static final int MAX_ATTACK = 3;
+    private static final int MAX_SHIELD = 2;
     
-    static private Random generator = new Random();
+    private static Random generator = new Random();
     
-    /* Metedo random pos*/
+    /* Metodo random pos*/
     public int randomPos(int max) {
         return generator.nextInt(max);
     }
