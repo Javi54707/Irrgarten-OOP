@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package irrgarten;
 
 import java.util.Random;
@@ -27,55 +23,55 @@ public class Dice {
     private static Random generator = new Random();
     
     /* Metodo random pos*/
-    public int randomPos(int max) {
+    public static int randomPos(int max) {
         return generator.nextInt(max);
     }
     
-    public int whoStarts(int nplayers) {
+    public static int whoStarts(int nplayers) {
         return generator.nextInt(nplayers);
     }
     
-    public float randomIntelligence() {
+    public static float randomIntelligence() {
         return generator.nextFloat() * MAX_INTELLIGENCE;
     }
     
-    public float randomStrength() {
+    public static float randomStrength() {
         return generator.nextFloat() * MAX_STRENGTH;
     }
     
-    public boolean resurrectPlayer() {
+    public static boolean resurrectPlayer() {
         return generator.nextFloat() <= RESURRECT_PROB;
     }
     
-    public int weaponsReward() {
+    public static int weaponsReward() {
         return generator.nextInt(WEAPONS_REWARD + 1);
     }
     
-    public int shieldsReward() {
+    public static int shieldsReward() {
         return generator.nextInt(SHIELDS_REWARD + 1);
     }
     
-    public int healthReward() {
+    public static int healthReward() {
         return generator.nextInt(HEALTH_REWARD + 1);
     }
     
-    public float weaponPower() {
+    public static float weaponPower() {
         return generator.nextFloat() * MAX_ATTACK;
     }
     
-    public float shieldPower() {
+    public static float shieldPower() {
         return generator.nextFloat() * MAX_SHIELD;
     }
     
-    public int usesLeft() {
+    public static int usesLeft() {
         return generator.nextInt(MAX_USES + 1);
     }
     
-    public float intensity(float competence) {
+    public static float intensity(float competence) {
         return generator.nextFloat() * competence;
     }
     
-    public boolean discardElement(int usesLeft) {
+    public static boolean discardElement(int usesLeft) {
         float p = usesLeft/MAX_USES;
         return generator.nextFloat() > p;
     }
