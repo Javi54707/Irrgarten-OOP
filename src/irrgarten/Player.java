@@ -6,26 +6,30 @@ package irrgarten;
 
 /**
  *
- * @author usuario
+ * @author Fco Javier Ortiz Molinero
+ * @author ALejandro Pérez Pérez 
  */
 public class Player {
     
-    private static final int MAX_WEAPONS=2;
+    private static final int MAX_WEAPONS = 2;
     
-    private static final int MAX_SHIELDS=3;
+    private static final int MAX_SHIELDS = 3;
         
-    private static final int INTIAL_HEALTH=10;
+    private static final int INTIAL_HEALTH = 10;
        
-    private static final int HITS2LOSE=3;
+    private static final int HITS2LOSE = 3;
 
     private String name;
     private char number;
-    private float intelligence = 0;
-    private float strength = 0;
-    private float health = 0;
-    private int row = 0;
-    private int col = 0;
-    private int consecutiveHits;
+    private float intelligence;
+    private float strength;
+    private float health;
+    private int row;
+    private int col;
+    private int consecutiveHits = 0;
+    
+    private Weapon weapons;
+    private Shield shields;
      
     public Player (char number, float intelligence, float strength){}
     

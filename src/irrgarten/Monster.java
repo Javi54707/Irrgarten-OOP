@@ -6,7 +6,8 @@ package irrgarten;
 
 /**
  *
- * @author usuario
+ * @author Fco Javier Ortiz Molinero
+ * @author Alejandro Pérez Pérez
  */
 public class Monster {
     
