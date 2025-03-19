@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package irrgarten;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -12,11 +10,8 @@ package irrgarten;
 public class Player {
     
     private static final int MAX_WEAPONS = 2;
-    
-    private static final int MAX_SHIELDS = 3;
-        
-    private static final int INTIAL_HEALTH = 10;
-       
+    private static final int MAX_SHIELDS = 3;        
+    private static final int INITIAL_HEALTH = 10;       
     private static final int HITS2LOSE = 3;
 
     private String name;
@@ -28,12 +23,26 @@ public class Player {
     private int col;
     private int consecutiveHits = 0;
     
-    private Weapon weapons;
-    private Shield shields;
+    private ArrayList<Weapon> weapons;
+    private ArrayList<Shield> shields;
      
-    public Player (char number, float intelligence, float strength){}
+    public Player (char number, float intelligence, float strength){
+        this.number = number;
+        name = "Player#" + this.number;
+        this.intelligence = intelligence;
+        this.strength = strength;
+        this.health = INITIAL_HEALTH;
+        
+        weapons = new ArrayList<>();
+        shields = new ArrayList<>();
+    }
     
-    public void resurrect(){}
+    public void resurrect(){
+        this.health = INITIAL_HEALTH;
+        this.resetHits();
+        this.weapons.clear();
+        this.shields.clear();
+    }
     
     public int getRow(){
         return this.row;
@@ -47,10 +56,13 @@ public class Player {
         return this.number;
     }
     
-    public void setPos(int row, int col) {}
+    public void setPos(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
     
     public boolean dead(){
-        throw new UnsupportedOperationException();
+        return (health <= 0);
     }
     
     public Directions move(Directions direction, Directions[] validMoves){
@@ -58,11 +70,11 @@ public class Player {
     }
 
     public float attack(){
-        throw new UnsupportedOperationException();
+        return (this.strength + this.sumWeapons());
     }
     
     public boolean defend(float receivedAttack) {
-        throw new UnsupportedOperationException();
+        return manageHit(receivedAttack);
     }
     
     public void receiveReward(){}
@@ -76,33 +88,50 @@ public class Player {
     public void receiveShield(Shield s){}
     
     public Weapon newWeapon(){
-        throw new UnsupportedOperationException();
+        Weapon n(Dice.weaponPower(), Dice.usesLeft());
+        return n;
     }
     
     public Shield newShield(){
-        throw new UnsupportedOperationException();
+        Shield n(Dice.shieldPower(), Dice.usesLeft());
+        return n;
     }
     
     public float sumWeapons(){
-        throw new UnsupportedOperationException();
+        float sum = 0;
+        for ( int i = 0; i < weapons.size(); i++) {
+            sum += weapons.get(i).attack();
+        }
+        
+        return sum;
     }
     
     public float sumShields(){
-        throw new UnsupportedOperationException();
+        float sum = 0;
+        for ( int i = 0; i < shields.size(); i++) {
+            sum += shields.get(i).protect();
+        }
+        
+        return sum;
     }
     
     public float defensiveEnergy(){
-        throw new UnsupportedOperationException();
+        return (this.intelligence + this.sumShields());
     }
     
     public boolean manageHit(float receivedAttack){
         throw new UnsupportedOperationException();
     }
     
-    public void resetHits(){}
+    public void resetHits(){
+        this.consecutiveHits = 0;
+    }
     
-    public void gotWounded(){}
+    public void gotWounded(){
+        this.health--;
+    }
     
-    public void incConsecutiveHints(){}
-        
+    public void incConsecutiveHints(){
+        this.consecutiveHits++;
+    }
 }

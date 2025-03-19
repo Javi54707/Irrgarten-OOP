@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package irrgarten;
 
 /**
@@ -13,21 +9,26 @@ public class Monster {
     
     private static final int INITIAL_HEALTH = 5;
     private String name;
-    private float intelligence = 0;
-    private float strength = 0;
-    private float health = 0;
-    private int row = 0;
-    private int col = 0;
+    private float intelligence;
+    private float strength;
+    private float health;
+    private int row;
+    private int col;
     
-    public Monster (String name, float intelligence, float strength){};
+    public Monster (String name, float intelligence, float strength){
+        this.name = name;
+        this.intelligence = intelligence;
+        this.strength = strength;
+        this.health = INITIAL_HEALTH;
+    };
     
     
     public boolean dead(){
-        throw new UnsupportedOperationException();
+        return (health <= 0);
     }
     
     public float attack(){
-        throw new UnsupportedOperationException();
+        return Dice.intensity(strength);
     }
     
     public boolean defend(float receivedAttack){
@@ -35,7 +36,8 @@ public class Monster {
     }
     
     public void setPos(int row, int col) {
-        throw new UnsupportedOperationException();
+        this.row = row;
+        this.col = col;
     }
     
     @Override
@@ -43,13 +45,7 @@ public class Monster {
         throw new UnsupportedOperationException();
     }
     
-    public void gotWounded(){
-        throw new UnsupportedOperationException();
+    private void gotWounded(){
+        health--;
     }
-    
-            
-            
-    
-    
-    
 }
