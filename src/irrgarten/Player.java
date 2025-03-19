@@ -83,21 +83,21 @@ public class Player {
         throw new UnsupportedOperationException();
     }
     
-    public void receiveWeapon(Weapon w){}
+    private void receiveWeapon(Weapon w){}
     
-    public void receiveShield(Shield s){}
+    private void receiveShield(Shield s){}
     
-    public Weapon newWeapon(){
+    private Weapon newWeapon(){
         Weapon n(Dice.weaponPower(), Dice.usesLeft());
         return n;
     }
     
-    public Shield newShield(){
+    private Shield newShield(){
         Shield n(Dice.shieldPower(), Dice.usesLeft());
         return n;
     }
     
-    public float sumWeapons(){
+    private float sumWeapons(){
         float sum = 0;
         for ( int i = 0; i < weapons.size(); i++) {
             sum += weapons.get(i).attack();
@@ -106,7 +106,7 @@ public class Player {
         return sum;
     }
     
-    public float sumShields(){
+    private float sumShields(){
         float sum = 0;
         for ( int i = 0; i < shields.size(); i++) {
             sum += shields.get(i).protect();
@@ -115,23 +115,23 @@ public class Player {
         return sum;
     }
     
-    public float defensiveEnergy(){
+    private float defensiveEnergy(){
         return (this.intelligence + this.sumShields());
     }
     
-    public boolean manageHit(float receivedAttack){
+    private boolean manageHit(float receivedAttack){
         throw new UnsupportedOperationException();
     }
     
-    public void resetHits(){
+    private void resetHits(){
         this.consecutiveHits = 0;
     }
     
-    public void gotWounded(){
+    private void gotWounded(){
         this.health--;
     }
     
-    public void incConsecutiveHints(){
+    private void incConsecutiveHints(){
         this.consecutiveHits++;
     }
 }
