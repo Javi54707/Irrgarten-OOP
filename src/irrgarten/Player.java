@@ -88,13 +88,11 @@ public class Player {
     private void receiveShield(Shield s){}
     
     private Weapon newWeapon(){
-        Weapon n(Dice.weaponPower(), Dice.usesLeft());
-        return n;
+        return new Weapon(Dice.weaponPower(), Dice.usesLeft());
     }
     
     private Shield newShield(){
-        Shield n(Dice.shieldPower(), Dice.usesLeft());
-        return n;
+        return new Shield(Dice.shieldPower(), Dice.usesLeft());
     }
     
     private float sumWeapons(){

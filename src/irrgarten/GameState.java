@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package irrgarten;
 
 /**
- * Esta clase alamcena una representación del estado del juego
+ * Esta clase almacena una representación del estado del juego
  * 
  * @author Fco Javier Ortiz Molinero
  * @author Alejandro Pérez Pérez
