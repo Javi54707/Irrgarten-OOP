@@ -24,7 +24,7 @@ public class Monster {
     
     
     public boolean dead(){
-        return (health <= 0);
+        return (this.health <= 0);
     }
     
     public float attack(){
@@ -42,10 +42,14 @@ public class Monster {
     
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        String r = this.name + "[i:" + this.intelligence + ", s:" +
+                this.strength + ", h:" + this.health + ", p:(" + this.row +
+                "," + this.col + ")]";
+        
+        return r;
     }
     
     private void gotWounded(){
-        health--;
+        this.health--;
     }
 }

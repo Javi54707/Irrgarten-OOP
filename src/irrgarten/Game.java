@@ -11,6 +11,43 @@ public class Game {
     
     private static final int MAX_ROUNDS = 10;
     
+    // ---------------------- PARA PERSONALIZAR LABERINTO ---------------- //
+    // Tamaño del laberinto
+    /**
+     * Número de filas del laberinto.
+     */
+    private static final int ROWS = 10;
+    /**
+     * Número de columnas del laberinto.
+     */
+    private static final int COLS = 10;
+    
+
+    // Monstruos a incluir
+    /**
+     * Número de monstruos a incluir en el laberinto.
+     */
+    private static final int NUM_MONSTERS = 3;
+    /**
+     * Posiciones iniciales de los monstruos en el laberinto.
+     */
+    private static final int[][] INIT_MONSTERS= {{0,0}, {1,1}, {2,2}};
+    
+    // Bloques a incluir
+    /**
+     * Número de bloques a incluir en el laberinto.
+     */
+    private static final int NUM_BLOCKS = 3;
+    /**
+     * Bloques iniciales a incluir en el laberinto donde el último parámetro
+     * indica la longitud.
+     */
+    private static final Object[][] INIT_BLOCKS =
+    {{Orientation.HORIZONTAL,0,0,3}, {Orientation.HORIZONTAL,3,3,5}, 
+        {Orientation.VERTICAL,8,9,2}};
+
+// ---------------------- PARA PERSONALIZAR LABERINTO ---------------- //
+    
     private int currentPlayerIndex;
     private String log;
     private Player currentPlayer;
@@ -19,7 +56,30 @@ public class Game {
     private Labyrinth labyrinth;
     
     public Game (int nplayers) {
+        // Definimos casilla de salida
+        int exitRow = Dice.randomPos(ROWS);
+        int exitCol = Dice.randomPos(COLS);
         
+        this.players = new ArrayList<>();
+        this.monsters = new ArrayList<>();
+         
+        // Creamos los jugadores y los introducimos en el vector players
+        for(int i = 0; i < nplayers; i++){
+            this.players.add(new Player((char)i, Dice.randomIntelligence(),
+                    Dice.randomStrength()));
+        }
+                 
+        // Definimos el jugador que empezará, es decir, el currentPlayer
+        this.currentPlayerIndex = Dice.whoStarts(nplayers);
+        this.currentPlayer = this.players.get(this.currentPlayerIndex);
+        
+        // Inicializamos la instancia de laberinto y la configuramos
+        this.labyrinth = new Labyrinth(ROWS, COLS, exitRow, exitCol);
+        this.configureLabyrinth();
+        this.labyrinth.spreadPlayers(this.players);
+         
+        // Inicializamos log
+        this.log = "Game just started.\n";
     }
     
     public boolean finished(){
@@ -49,7 +109,21 @@ public class Game {
     }
     
     private void configureLabyrinth(){
+        // Inicializamos el vector de monstruos y los añadimos al laberinto
+        for (int i = 0; i < NUM_MONSTERS; i++){
+            Monster monster = new Monster ("Monster " + i,
+                    Dice.randomIntelligence(), Dice.randomStrength());
+            this.monsters.add(monster);
+            this.labyrinth.addMonster(INIT_MONSTERS[i][0], INIT_MONSTERS[i][1],
+                    monster);
+        }
         
+        // Añadimos los bloques al laberinto
+        for (int i = 0; i < NUM_BLOCKS; i++){
+            this.labyrinth.addBlock((Orientation)INIT_BLOCKS[i][0],
+                    (int)INIT_BLOCKS[i][1], (int)INIT_BLOCKS[i][2],
+                    (int)INIT_BLOCKS[i][3]);
+        }
     }
     
     private void nextPlayer(){
@@ -75,7 +149,7 @@ public class Game {
     }
     
     private void logMonsterWon(){
-        this.log += "Monster won the combat\n";
+        this.log += "Monster won the combat.\n";
     }
     
     private void logResurrected(){

@@ -44,7 +44,7 @@ public class Labyrinth {
         this.labyrinth[exitRow][exitCol] = EXIT_CHAR;
     }
     
-    public void spreadPlayers(Player[] players){}
+    public void spreadPlayers(ArrayList<Player> players){}
     
     public boolean haveAWinner(){
         return (this.players[this.exitRow][this.exitCol] != null);
@@ -52,7 +52,16 @@ public class Labyrinth {
     
     @Override
     public String toString(){
-        throw new UnsupportedOperationException();
+        String r = "";
+        
+        for (int i = 0; i < this.nRows; i++) {
+            for (int j = 0; j < this.nCols; j++) {
+                r += this.labyrinth[i][j];
+            }
+            r += "\n";
+        }
+        
+        return r;
     }
     
     public void addMonster(int row, int col, Monster monster){
@@ -71,7 +80,7 @@ public class Labyrinth {
     public void addBlock(Orientation orientation, int startRow, int startCol, 
                          int length){}
     
-    public Directions[] validMoves(int row, int col){
+    public ArrayList<Directions> validMoves(int row, int col){
         throw new UnsupportedOperationException();
     }
     

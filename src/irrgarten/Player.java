@@ -80,7 +80,33 @@ public class Player {
     public void receiveReward(){}
       
     public String to_string(){
-        throw new UnsupportedOperationException();
+        String r = this.name + "[i:" + this.intelligence + ", s:" +
+                this.strength + ", h:" + this.health + ", p:(" + this.row +
+                "," + this.col + "), ch:" + this.consecutiveHits;
+        
+        String w = "w:[";
+        for (int i = 0; i < this.weapons.size() - 1; i++) {
+            w += this.weapons.get(i).toString() + ", ";
+        }
+        
+        if (!this.weapons.isEmpty()) {
+            w += this.weapons.get(this.weapons.size() - 1);
+        }
+        w += "]";
+        
+        String s = "s:[";
+        for (int i = 0; i < this.shields.size() - 1; i++) {
+            s += this.shields.get(i).toString() + ", ";
+        }
+        
+        if (!this.shields.isEmpty()) {
+            s += this.shields.get(this.shields.size() - 1);
+        }
+        s += "]";
+        
+        r += ", " + w + ", " + s + "]";
+        
+        return r;
     }
     
     private void receiveWeapon(Weapon w){}
