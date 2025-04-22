@@ -87,7 +87,34 @@ public class Game {
     }
     
     public boolean nextStep(Directions preferredDirection) {
-        throw new UnsupportedOperationException();
+        log = "";
+
+        if (currentPlayer.dead()){
+            manageResurrection();
+        }
+        else{
+            Directions direction = this.actualDirection(preferredDirection);
+            if (direction != preferredDirection){
+                logPlayerNoOrders();
+            }
+
+            Monster monster = this.labyrinth.putPlayer(direction,currentPlayer);
+
+            if (monster == null){
+                logNoMonster();
+            }
+            else{
+                GameCharacter winner = combat(monster);
+                manageReward(winner);
+            }
+        }
+
+ 
+        boolean endGame = finished();
+        if (!endGame)
+            nextPlayer();
+
+        return endGame;
     }
     
     public GameState getGameState(){
@@ -132,16 +159,55 @@ public class Game {
     }
     
     private Directions actualDirection(Directions preferredDirection){
-        throw new UnsupportedOperationException();
+        int currentRow = this.currentPlayer.getRow();
+        int currentCol = this.currentPlayer.getCol();
+
+        ArrayList<Directions> validMoves = this.labyrinth.validMoves(currentRow,
+                currentCol);
+
+        return currentPlayer.move(preferredDirection, validMoves);
     }
     
     private GameCharacter combat(Monster monster){
-        throw new UnsupportedOperationException();
+        int rounds = 0;
+
+        GameCharacter winner = GameCharacter.PLAYER;
+        boolean lose = monster.defend(currentPlayer.attack());
+
+        while (!lose && rounds<MAX_ROUNDS){
+            rounds++;
+
+            winner = GameCharacter.MONSTER;
+            lose = currentPlayer.defend(monster.attack());
+
+            if (!lose){
+                winner = GameCharacter.PLAYER;
+                lose = monster.defend(currentPlayer.attack());
+            }
+        }
+
+        this.logRounds(rounds, MAX_ROUNDS);
+        return winner;
     }
     
-    private void manageReward(GameCharacter winner){}
+    private void manageReward(GameCharacter winner){
+        if (winner == GameCharacter.PLAYER){
+            this.currentPlayer.receiveReward();
+            this.logPlayerWon();
+        }
+        else{
+            this.logMonsterWon();
+        }
+    }
     
-    private void manageResurrection(){}
+    private void manageResurrection(){
+        if (Dice.resurrectPlayer()){
+            this.currentPlayer.resurrect();
+            this.logResurrected();
+        }            
+        else
+            this.logPlayerSkipTurn();
+    }
     
     private void logPlayerWon(){
         this.log += "Player " + this.currentPlayerIndex +

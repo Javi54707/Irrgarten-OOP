@@ -36,7 +36,7 @@ public class GameState {
      * Consultor del estado del laberinto
      * @return Estado del laberinto
      */
-    public String getlabyrinth() {
+    public String getLabyrinth() {
         return labyrinth;
     }
     
@@ -44,7 +44,7 @@ public class GameState {
      * Consultor del estado de los jugadores
      * @return Estado de los jugadores
      */
-    public String getplayers() {
+    public String getPlayers() {
         return players;
     }
     
@@ -52,7 +52,7 @@ public class GameState {
      * Consultor del estado de los monstruos
      * @return Estado de los monstruos
      */
-    public String getmonsters() {
+    public String getMonsters() {
         return monsters;
     }
     
@@ -60,7 +60,7 @@ public class GameState {
      * Consultor del jugador actual
      * @return Identificador del jugador actual
      */
-    public int getcurrentPlayer() {
+    public int getCurrentPlayer() {
         return currentPlayer;
     }
     
@@ -68,7 +68,7 @@ public class GameState {
      * Consultor de si hay un ganador
      * @return true si hay ganador, false si no lo hay
      */
-    public boolean getwinner() {
+    public boolean getWinner() {
         return winner;
     }
     
@@ -76,7 +76,7 @@ public class GameState {
      * Consultor de eventos interesantes en la partida
      * @return Eventos interesantes en la partida
      */
-    public String getlog() {
+    public String getLog() {
         return log;
     }
 }

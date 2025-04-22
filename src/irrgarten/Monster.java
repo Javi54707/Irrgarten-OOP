@@ -32,7 +32,16 @@ public class Monster {
     }
     
     public boolean defend(float receivedAttack){
-        throw new UnsupportedOperationException();
+        boolean isDead = this.dead();
+ 
+        if (!isDead){
+            if (Dice.intensity(this.intelligence) < receivedAttack){
+                this.gotWounded();
+                isDead = this.dead();
+            }
+        }
+
+        return isDead;
     }
     
     public void setPos(int row, int col) {
