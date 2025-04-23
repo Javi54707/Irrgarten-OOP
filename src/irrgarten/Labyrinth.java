@@ -46,8 +46,7 @@ public class Labyrinth {
     }
     
     public void spreadPlayers(ArrayList<Player> players){
-        for (int i=0; i<players.size(); i++){
-
+        for (int i = 0; i < players.size(); i++){
             int [] pos = randomEmptyPos();
             putPlayer2D(INVALID, INVALID, pos[ROW], pos[COL], players.get(i));
         }
@@ -59,22 +58,34 @@ public class Labyrinth {
     
     @Override
     public String toString(){
-        String r = "";
+        // Cálculo del número de caracteres que debe ocupar cada parte
+        int filSize = Integer.toString(this.nRows-1).length();
+        int colSize = Integer.toString(this.nCols-1).length();
+        int nPlayersSize = Integer.toString(this.players.length-1).length();
         
-        for (int i = 0; i < this.nCols; i++) {
-           r += i + " ";
+        // Cálculo del tamaño máximo
+        int maxSize = Math.max(Math.max(filSize, colSize), nPlayersSize);
+        final String FORMAT = "%"+maxSize+"s";
+
+        // Cadena a devolver
+        String toReturn="";
+
+        // Índices en cada columna
+        toReturn+=" " + String.format(FORMAT, " ");
+        for (int i=0; i<this.nCols; i++){
+            toReturn+=String.format(FORMAT, i)+" ";
         }
-        r += "\n";
-        
-        for (int j = 0; j < this.nRows; j++) {
-            r += j;
-            for (int k = 0; k < this.nCols; k++) {
-                r += this.labyrinth[j][k];
+        toReturn+="\n";
+
+
+        for(int r=0; r<this.nRows; r++){
+            toReturn+=String.format(FORMAT, r)+" "; // Índices en cada fila
+            for(int c=0; c<this.nCols; c++){
+                toReturn+=String.format(FORMAT, this.labyrinth[r][c])+" ";
             }
-            r += "\n";
+            toReturn+="\n";
         }
-        
-        return r;
+        return toReturn;
     }
     
     public void addMonster(int row, int col, Monster monster){
@@ -221,6 +232,7 @@ public class Labyrinth {
                     this.players[oldRow][oldCol] = null;                    
                 }
             }
+            
             if (monsterPos(row, col)){
                 this.labyrinth[row][col] = COMBAT_CHAR;
                 output = this.monsters[row][col];
