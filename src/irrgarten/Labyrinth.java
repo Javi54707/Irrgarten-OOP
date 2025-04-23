@@ -18,10 +18,10 @@ public class Labyrinth {
     private static final int COL = 1;
     private static final int INVALID = -1;
     
-    private int nRows;
-    private int nCols;
-    private int exitRow;
-    private int exitCol;
+    private final int nRows;
+    private final int nCols;
+    private final int exitRow;
+    private final int exitCol;
     private Monster[][] monsters;
     private Player[][] players;
     private char[][] labyrinth;
@@ -61,9 +61,15 @@ public class Labyrinth {
     public String toString(){
         String r = "";
         
-        for (int i = 0; i < this.nRows; i++) {
-            for (int j = 0; j < this.nCols; j++) {
-                r += this.labyrinth[i][j];
+        for (int i = 0; i < this.nCols; i++) {
+           r += i + " ";
+        }
+        r += "\n";
+        
+        for (int j = 0; j < this.nRows; j++) {
+            r += j;
+            for (int k = 0; k < this.nCols; k++) {
+                r += this.labyrinth[j][k];
             }
             r += "\n";
         }
@@ -210,20 +216,20 @@ public class Labyrinth {
 
         if (canStepOn(row, col)){
             if (posOK(oldRow, oldCol)){
-                if (players[oldRow][oldCol]==player){
+                if (players[oldRow][oldCol] == player){
                     updateOldPos(oldRow, oldCol);
-                    this.players[oldRow][oldCol]=null;                    
+                    this.players[oldRow][oldCol] = null;                    
                 }
             }
             if (monsterPos(row, col)){
-                this.labyrinth[row][col]=COMBAT_CHAR;
+                this.labyrinth[row][col] = COMBAT_CHAR;
                 output = this.monsters[row][col];
             }
             else{
-                this.labyrinth[row][col]=player.getNumber();
+                this.labyrinth[row][col] = player.getNumber();
             }
 
-            this.players[row][col]=player;
+            this.players[row][col] = player;
             player.setPos(row, col);
         }
 
