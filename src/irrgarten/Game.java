@@ -51,9 +51,9 @@ public class Game {
     private int currentPlayerIndex;
     private String log;
     private Player currentPlayer;
-    private ArrayList<Player> players;
-    private ArrayList<Monster> monsters;
-    private Labyrinth labyrinth;
+    private final ArrayList<Player> players;
+    private final ArrayList<Monster> monsters;
+    private final Labyrinth labyrinth;
     
     public Game (int nplayers) {
         // Definimos casilla de salida
@@ -162,10 +162,10 @@ public class Game {
         int currentRow = this.currentPlayer.getRow();
         int currentCol = this.currentPlayer.getCol();
 
-        ArrayList<Directions> validMoves = this.labyrinth.validMoves(currentRow,
+        ArrayList<Directions> valids = this.labyrinth.validMoves(currentRow,
                 currentCol);
 
-        return currentPlayer.move(preferredDirection, validMoves);
+        return currentPlayer.move(preferredDirection, valids);
     }
     
     private GameCharacter combat(Monster monster){

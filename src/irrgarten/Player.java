@@ -15,10 +15,10 @@ public class Player {
     private static final int HITS2LOSE = 3;
     private static final int INVALID = -1;
 
-    private String name;
-    private char number;
-    private float intelligence;
-    private float strength;
+    private final String name;
+    private final char number;
+    private final float intelligence;
+    private final float strength;
     private float health;
     private int row;
     private int col;
@@ -72,11 +72,11 @@ public class Player {
     public Directions move(Directions direction,
             ArrayList<Directions> validMoves){
         int size = validMoves.size();
-        boolean contained = validMoves.contains(direction);
+        boolean valid = validMoves.contains(direction);
 
         Directions toReturn;
 
-        if ((size > 0) && !contained){
+        if ((size > 0) && !valid){
             toReturn = validMoves.get(0);
         }
         else{
@@ -91,17 +91,17 @@ public class Player {
     }
     
     public boolean defend(float receivedAttack) {
-        return manageHit(receivedAttack);
+        return this.manageHit(receivedAttack);
     }
     
     public void receiveReward(){
         int wReward = Dice.weaponsReward();
         for (int i = 0; i < wReward; i++)
-            this.weapons.add(this.newWeapon());
+            this.receiveWeapon(this.newWeapon());
 
         int sReward = Dice.shieldsReward();
         for (int i = 0; i < sReward; i++)
-            this.shields.add(this.newShield());
+            this.receiveShield(this.newShield());
 
         this.health += Dice.healthReward();
     }
@@ -137,7 +137,7 @@ public class Player {
     }
     
     private void receiveWeapon(Weapon w) {
-        for (int i=0; i<weapons.size(); i++){
+        for (int i = 0; i < weapons.size(); i++){
             if (weapons.get(i).discard()){
                 weapons.remove(i);
                 i--;
@@ -145,11 +145,11 @@ public class Player {
         }
         
         if (weapons.size() < MAX_WEAPONS)
-             weapons.add(w);
+            weapons.add(w);
     }
     
     private void receiveShield(Shield s) {
-        for (int i=0; i<shields.size(); i++){
+        for (int i = 0; i < shields.size(); i++){
             if (shields.get(i).discard()){
                 shields.remove(i);
                 i--;
@@ -195,16 +195,16 @@ public class Player {
             this.gotWounded();
             this.incConsecutiveHits();
         }
-        else{
+        else {
             this.resetHits();
         }
 
-        boolean lose = (this.consecutiveHits==Player.HITS2LOSE) || this.dead();
+        boolean lost = (this.consecutiveHits == Player.HITS2LOSE)||this.dead();
 
-        if (lose)
+        if (lost)
             resetHits();
 
-        return lose;
+        return lost;
     }
     
     private void resetHits(){
