@@ -65,8 +65,8 @@ public class Game {
          
         // Creamos los jugadores y los introducimos en el vector players
         for(int i = 0; i < nplayers; i++){
-            this.players.add(new Player((char)i, Dice.randomIntelligence(),
-                    Dice.randomStrength()));
+            this.players.add(new Player((char)('0' + i),
+                    Dice.randomIntelligence(), Dice.randomStrength()));
         }
                  
         // Definimos el jugador que empezará, es decir, el currentPlayer
