@@ -1,66 +1,57 @@
 package irrgarten;
 
 /**
- *
+ * Clase que almacena información de cada monstruo
+ * 
  * @author Fco Javier Ortiz Molinero
- * @author Alejandro Pérez Pérez
+ * @author Alejandro Perez Perez
  */
-public class Monster {
-    private static final int INVALID = -1;
-    private static final int INITIAL_HEALTH = 5;
-    private final String name;
-    private final float intelligence;
-    private final float strength;
-    private float health;
-    private int row;
-    private int col;
+public class Monster extends LabyrinthCharacter {
     
-    public Monster (String name, float intelligence, float strength){
-        this.name = name;
-        this.intelligence = intelligence;
-        this.strength = strength;
-        this.health = INITIAL_HEALTH;
-        this.row = INVALID;
-        this.col = INVALID;
-    };
-    
-    
-    public boolean dead(){
-        return (this.health <= 0);
+    /**
+     * Número de unidades de salud inicial de los monstruos
+     */
+    private static final int INITIAL_HEALTH=5;
+       
+   /**
+     * Constructor de la clase
+     * 
+     * @param name Valor inicial para el nombre
+     * @param intelligence Valor inicial para la inteligencia
+     * @param strength Valor inicial para la fuerza
+     */
+    public Monster(String name, float intelligence, float strength){
+        super(name, intelligence, strength, INITIAL_HEALTH);
     }
     
+    /**
+     * Indica la fuerza de ataque del monstruo
+     * @return Devuelve el valor de fuerza del ataque
+     */
+    @Override
     public float attack(){
-        return Dice.intensity(this.strength);
+        return Dice.intensity(this.getStrength());
     }
     
+    /**
+     * Método que permite al monstruo defenderse de un ataque.
+     * @param receivedAttack Intensidad del ataque recibido.
+     * @return Devuelve true si el monstruo ha muerto y false en caso contrario.
+     */
+    @Override
     public boolean defend(float receivedAttack){
-        boolean dead = this.dead();
- 
-        if (!dead){
-            if (Dice.intensity(this.intelligence) < receivedAttack){
+
+        boolean isDead = this.dead();
+        
+        if (!isDead){
+            if (Dice.intensity(this.getIntelligence()) < receivedAttack){
+                // Si está vivo y el ataque le vence, se contabiliza
                 this.gotWounded();
-                dead = this.dead();
+                isDead = this.dead();
             }
         }
 
-        return dead;
+        return isDead;
     }
-    
-    public void setPos(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
-    
-    @Override
-    public String toString() {
-        String r = this.name + "[i:" + this.intelligence + ", s:" +
-                this.strength + ", h:" + this.health + ", p:(" + this.row +
-                "," + this.col + ")]";
-        
-        return r;
-    }
-    
-    private void gotWounded(){
-        this.health--;
-    }
+   
 }

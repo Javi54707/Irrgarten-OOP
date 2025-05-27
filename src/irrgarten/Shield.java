@@ -8,10 +8,7 @@ package irrgarten;
  * @author Alejandro Pérez Pérez
  */
 
-public class Shield {   
-    // Atributos de instancia privados
-    private float protection = 0;
-    private int uses = 0;
+public class Shield extends CombatElement {   
     
     /**
      * Constructor de la clase Shield
@@ -19,8 +16,7 @@ public class Shield {
      * @param u usos restantes del escudo
      */
     Shield (float p, int u) {
-        protection = p;
-        uses = u;
+        super(p,u);
     }
     
     /**
@@ -28,12 +24,7 @@ public class Shield {
      * @return Intensidad de la protección del escudo
      */
     public float protect() {       
-        if (uses > 0) {
-            uses--;
-            return protection;
-        } else {
-            return 0;
-        }
+        return this.produceEffect();
     }
     
     /**
@@ -42,16 +33,8 @@ public class Shield {
      */
     @Override    
     public String toString() {
-        return "S[" + protection + "," + uses + "]";
-    }
-    
-    /**
-     * Método para determinar si un escudo se debe descartar o no. La 
-     * probabilidad de ser descartado es inversamente proporcional a los usos
-     * restantes del escudo
-     * @return True si se descarta, false si no
-     */
-    public boolean discard() {
-        return Dice.discardElement(uses);
+        String toReturn="S";
+        toReturn+=super.toString();
+        return toReturn;
     }
 }

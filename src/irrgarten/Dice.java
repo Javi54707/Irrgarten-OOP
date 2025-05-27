@@ -1,6 +1,7 @@
 package irrgarten;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * Esta clase toma las decisiones que dependen del azar en el juego
@@ -137,5 +138,25 @@ public class Dice {
     public static boolean discardElement(int usesLeft) {
         float p = usesLeft/MAX_USES;
         return generator.nextFloat() > p;
+    }
+    
+    /**
+     * En función de la inteligencia dada, devolverá ,con más probabilidad si <b>intelligence</b> es mayor,
+     * <b>preference</b> y ,con menos, una dirección aleatoria de <b>validMoves</b> 
+     * @param preference Dirección preferida hacia la que moverse
+     * @param validMoves Direcciones posibles para moverse
+     * @param intelligence Inteligencia del jugador
+     * @return Dirección elegida hacia la que moverse
+     */
+    public static Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence){
+        Directions toReturn=preference;
+        
+        if(Dice.randomIntelligence()>intelligence){
+            int indice=generator.nextInt(validMoves.size());
+            toReturn=validMoves.get(indice);          
+        }
+        
+        return toReturn;
+             
     }
 }

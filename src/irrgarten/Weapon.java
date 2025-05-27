@@ -7,10 +7,9 @@ package irrgarten;
  * @author Fco Javier Ortiz Molinero
  * @author Alejandro Pérez Pérez
  */
-public class Weapon {
+public class Weapon extends CombatElement {
     // Atributos de instancia privados
-    private float power = 0;
-    private int uses = 0;
+   
     
     /**
      * Constructor de la clase Weapon
@@ -18,8 +17,7 @@ public class Weapon {
      * @param u usos restantes del arma
      */
     Weapon(float p, int u) {
-        power = p;
-        uses = u;
+        super(p,u);
     }
     
     /**
@@ -27,12 +25,7 @@ public class Weapon {
      * @return Intensidad del ataque del arma
      */
     public float attack() {
-        if (uses > 0) {
-            uses--;
-            return power;
-        }
-        else
-            return 0;
+        return this.produceEffect();
     }
     
     /**
@@ -41,16 +34,9 @@ public class Weapon {
      */
     @Override
     public String toString() {
-        return "W[" + power + "," + uses + "]";
+        String toReturn="W";
+        toReturn+=super.toString();
+        return toReturn;
     }
-    
-    /**
-     * Método para determinar si un arma se debe descartar o no. La probabilidad
-     * de ser descartada es inversamente proporcional a los usos restantes del
-     * arma
-     * @return True si se descarta, false si no
-     */
-    public boolean discard() {
-        return Dice.discardElement(uses);
-    }
+
 }
