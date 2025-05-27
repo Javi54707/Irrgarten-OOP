@@ -12,11 +12,10 @@ import irrgarten.UI.GraphicUI;
 public class Test {
     
     /**
-     * Método que realiza las pruebas unia
-     * tarias de la práctica 5
+     * Método que realiza las pruebas de la práctica 5
      *
      */
-    public static void main ( ) {
+    public static void main (String [] args) {
         
         final int N_PLAYERS = 3;
 
