@@ -18,11 +18,9 @@ public class Test {
     public static void main (String [] args) {
         
         final int N_PLAYERS = 3;
-
-        GraphicUI vista = new GraphicUI();
+        
         Game juego = new Game(N_PLAYERS);
-        Controller controlador = new Controller(juego, vista);
-
+        Controller controlador = new Controller(juego, new GraphicUI());
         controlador.play();
     }
 }

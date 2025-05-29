@@ -1,6 +1,7 @@
 package irrgarten;
 
 import java.util.ArrayList;
+import irrgarten.Directions;
 
 /**
  *
