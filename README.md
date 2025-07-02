@@ -22,8 +22,9 @@ This is an object-oriented dungeon adventure game developed in Java. It was buil
    ```bash
    git clone https://github.com/Javi54707/Irrgarten-OOP.git
 2. Compile and run:
-  javac -d bin src/irrgarten/*.java
-  java -cp bin irrgarten.UI.TextUI
+   ```bash
+   javac -d bin src/irrgarten/*.java
+   java -cp bin irrgarten.UI.TextUI
 Replace TextUI with your chosen entry class if different.
 
 ## 🎓 Academic Context
