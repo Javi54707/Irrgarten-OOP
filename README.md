@@ -1,6 +1,7 @@
 # Irrgarten – Text Adventure Game (OOP Project)
 
 This is an object-oriented dungeon adventure game developed in Java. It was built as part of a university course on Object-Oriented Programming (PDOO) at the University of Granada, within the Double Degree in Computer Engineering and Mathematics.
+Player must escape a labyrinth collecting rewards and avoiding monsters.
 
 ## 🧩 Features
 
